@@ -8,15 +8,17 @@ import { Lista } from '../models/lista.model';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  standalone: true,
-  imports: [//ionicModule, ExploreContainerComponent, 
-  CommonModule]
+  standalone: false,
+  //imports: [//ionicModule, ExploreContainerComponent, 
+  //CommonModule]
 })
 export class Tab1Page {
 
-  constructor(public alertController:AlertController, 
+  constructor(
+    public alertController:AlertController, 
     public toastController:ToastController,
-    public listaService:ListaService) {}
+    public listaService:ListaService
+    ) {}
 
     async AgregarLista() {
     let alerta = await this.alertController.create({

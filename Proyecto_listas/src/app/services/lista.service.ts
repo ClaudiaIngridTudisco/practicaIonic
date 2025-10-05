@@ -22,7 +22,6 @@ export class ListaService {
     return ObjetoLista.titulo;     //Validamos si la lista fue creada,
   }
 
-
     //función para guardar las listas en el localStorage
 
     guardarStorage() {
