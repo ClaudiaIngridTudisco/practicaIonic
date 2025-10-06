@@ -5,8 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { ListasComponent } from './listas.component';
 
 @NgModule({
-  declarations: [ListasComponent],
-  imports: [CommonModule, FormsModule, IonicModule],
+  //declarations: [ListasComponent],
+  imports: [CommonModule, FormsModule, IonicModule, ListasComponent],
   exports: [ListasComponent]
 })
 export class ListasModule {}
