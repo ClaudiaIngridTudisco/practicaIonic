@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import {Lista} from "../models/lista.model"
+import {Lista} from "../models/lista.model";
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,10 @@ import {Lista} from "../models/lista.model"
 export class ListaService {
 
    public listas: Lista[] = [];   //Almacena las listas de actividades
-    constructor() {
+    constructor(
+    public alertController:AlertController, 
+    public toastController:ToastController
+    ) {
     this.cargarStorage();
    }
 
@@ -55,6 +59,23 @@ export class ListaService {
     listaEditar.titulo = lista.titulo;
   }
     this.guardarStorage();
+  }
+
+
+  validarInput(input: any):boolean {
+  if(input && input.titulo) {
+  return true;
+}
+  this.presentToast('Debe ingresar un valor');
+   return false; 
+  }
+
+  async presentToast(mensage:string) {
+  let toast = await this.toastController.create({
+  message: mensage,
+  duration: 2000
+  });
+  toast.present();
   }
 
    }

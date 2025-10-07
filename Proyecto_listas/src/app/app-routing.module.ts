@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'agregar/:idlista',    //Esto nos permitirá acceder al detalle de la lista que el usuario ingrese, para identificarla se le enviará el id de la misma.
+    loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
   }
 ];
 @NgModule({

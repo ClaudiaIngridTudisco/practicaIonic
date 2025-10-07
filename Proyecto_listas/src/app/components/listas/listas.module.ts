@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ListasComponent } from './listas.component';
 
+
 @NgModule({
-  //declarations: [ListasComponent],
+  //declarations: [ListasComponent], esta línea produce error, se agrega a imports.
   imports: [CommonModule, FormsModule, IonicModule, ListasComponent],
   exports: [ListasComponent]
 })
