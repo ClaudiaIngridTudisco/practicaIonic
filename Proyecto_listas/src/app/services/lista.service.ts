@@ -33,6 +33,12 @@ export class ListaService {
     localStorage.setItem('listas', stringListas); //Se debe ingresar dos parámetros, el primero un nombre y el se-gundo el contenido
     }
 
+    obtenerLista(idLista: string | number) {
+    const id = Number(idLista); //Parseamos el dato a Number, por si viene de tipo string, de esta manera siempre trabajaremos con un Number
+    let lista = this.listas.find((itemLista)=> itemLista.id == id);
+    return lista;
+    }
+
     //Función para evitar que se borren los datos cargados en el LocalStorage
 
     cargarStorage() {

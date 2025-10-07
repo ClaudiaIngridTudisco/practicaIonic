@@ -26,7 +26,7 @@ export class ListasComponent implements OnInit {
     , private roter: Router
   ) { }
 
-    async EditarLista(lista: Lista) { 
+async EditarLista(lista: Lista) { 
 let alerta = await this.listaService.alertController.create({ 
 header: "Editar lista", 
 inputs: [ 
