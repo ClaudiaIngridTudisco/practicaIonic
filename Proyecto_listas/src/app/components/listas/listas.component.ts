@@ -1,19 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ListaService } from 'src/app/services/lista.service';
 import { Lista } from 'src/app/models/lista.model';
 import { Router } from '@angular/router';
+import { FiltroListaModule } from '../../pipes/filtro-lista-module';
+
 
 @Component({
   selector: 'app-listas',
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule]
+  imports: [CommonModule, IonicModule, FiltroListaModule]
 })
 
 export class ListasComponent implements OnInit {
+  @Input() tipo:string = '';       //para pasar el parámetro del tab en el cual esté posicionado el usuario
+
+  
+  constructor(
+    public listaService: ListaService
+    , private roter: Router
+  ) { }
 
   listaSeleccionada(listaItem: Lista) {
     
@@ -21,10 +30,6 @@ export class ListasComponent implements OnInit {
    this.roter.navigateByUrl(URL);
   }
 
-  constructor(
-    public listaService: ListaService
-    , private roter: Router
-  ) { }
 
 async EditarLista(lista: Lista) { 
 let alerta = await this.listaService.alertController.create({ 

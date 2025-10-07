@@ -1,10 +1,9 @@
 
 
 <p>
-  listas works!
-</p>
+  
 <ion-list>
-  <ion-item-sliding *ngFor="let listaItem of listaService.listas">
+  <ion-item-sliding *ngFor="let listaItem of listaService.listas | filtroLista : tipo">  <!--Se utiliza el pipe personalizado "filtroLista" para filtrar las listas según el tipo pasado como parámetro desde los tabs.-->
     <ion-item (click)="listaSeleccionada(listaItem)">
       <ion-label>{{ listaItem.titulo }}</ion-label>
     </ion-item>
@@ -16,3 +15,4 @@
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>
+</p>

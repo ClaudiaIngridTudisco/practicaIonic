@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import {Lista} from "../models/lista.model";
 import { AlertController, ToastController } from '@ionic/angular';
+import { Actividad } from "../models/actividades.model";
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +43,28 @@ export class ListaService {
     //Función para evitar que se borren los datos cargados en el LocalStorage
 
     cargarStorage() {
-    const listaStorage = localStorage.getItem('listas'); //Se debe ingresar el parámetro con el nombre del objeto que queremos recuperar
-    if(listaStorage === null) {
-    return this.listas = []; //Si el Storage está vacío devolvemos el objeto listas vacío también
+      const listaStorage = localStorage.getItem('listas');
+      if (listaStorage === null) {
+        return this.listas = [];
+      } else {
+        let objLista = JSON.parse(listaStorage);
+        // Reconstruir instancias de Lista y Actividad
+        this.listas = objLista.map((l: any) => {
+          const nuevaLista = new Lista(l.titulo);
+          nuevaLista.id = l.id;
+          nuevaLista.creadaEn = new Date(l.creadaEn);
+          nuevaLista.terminadaEn = l.terminadaEn ? new Date(l.terminadaEn) : undefined;
+          nuevaLista.completada = l.completada;
+          nuevaLista.item = (l.item || []).map((a: any) => {
+            const nuevaActividad = new Actividad(a.descripcion);
+            nuevaActividad.completado = a.completado;
+            return nuevaActividad;
+          });
+          return nuevaLista;
+        });
+        return this.listas;
+      }
     }
-    else
-    {
-    let objLista = JSON.parse(listaStorage); //Convierte el texto plano a objeto para poder ingresarlo
-    return this.listas = objLista;
-    }
-  }
 
     eliminarLista(lista: Lista) {
     let nuevoListado = this.listas.filter((listaItem)=> listaItem.id !== lista.id); //Guardamos todas las listas menos la lista a eliminar //filter devuelve un arreglo de listas
