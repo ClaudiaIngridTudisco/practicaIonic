@@ -1,7 +1,7 @@
 
 
 <p>
-  
+    <!--Acá va el listado de ítems-->
 <ion-list>
   <ion-item-sliding *ngFor="let listaItem of listaService.listas | filtroLista : tipo">  <!--Se utiliza el pipe personalizado "filtroLista" para filtrar las listas según el tipo pasado como parámetro desde los tabs.-->
     <ion-item (click)="listaSeleccionada(listaItem)">

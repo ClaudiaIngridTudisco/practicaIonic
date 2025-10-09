@@ -12,6 +12,7 @@ import { Actividad } from "../models/actividades.model";
 export class ListaService {
 
    public listas: Lista[] = [];   //Almacena las listas de actividades
+   
     constructor(
     public alertController:AlertController, 
     public toastController:ToastController
@@ -21,17 +22,26 @@ export class ListaService {
 
    crearLista(nombreLista:string){
     let ObjetoLista = new Lista (nombreLista);
+    /*let ObjetoLista = { 
+    id: 0,
+    titulo: nombreLista,
+    creadaEn: new Date(),
+    terminadaEn: null,
+    completada: false,
+    item: [] //Para guardar la lista de actividades
+      };*/
 
     this.listas.push(ObjetoLista);//Ingresamos en el array de listas el objeto con los datos creados
     this.guardarStorage();
     return ObjetoLista.titulo;     //Validamos si la lista fue creada,
   }
 
+
     //función para guardar las listas en el localStorage
 
     guardarStorage() {
     let stringListas: string = JSON.stringify(this.listas); //Convertimos el array de listas en texto plano
-    localStorage.setItem('listas', stringListas); //Se debe ingresar dos parámetros, el primero un nombre y el se-gundo el contenido
+    localStorage.setItem('listas', stringListas); //Se debe ingresar dos parámetros, el primero un nombre y el segundo el contenido
     }
 
     obtenerLista(idLista: string | number) {
@@ -43,12 +53,23 @@ export class ListaService {
     //Función para evitar que se borren los datos cargados en el LocalStorage
 
     cargarStorage() {
+      /*cargarStorage() {
+      const listaStorage = localStorage.getItem('listas'); //Se debe ingresar el parámetro con el nombre del objeto que queremos recuperar
+    if(listaStorage === null) {
+    return this.listas = []; //Si el Storage está vacío devolvemos el objeto listas vacío también
+      }
+    else
+    {
+    let objLista = JSON.parse(listaStorage); //Convierte el texto plano a objeto para poder ingresarlo
+    return this.listas = objLista;
+    }
+    }*/
       const listaStorage = localStorage.getItem('listas');
       if (listaStorage === null) {
         return this.listas = [];
       } else {
         let objLista = JSON.parse(listaStorage);
-        // Reconstruir instancias de Lista y Actividad
+        // Reconstruir instancias de Lista y Actividad revisar
         this.listas = objLista.map((l: any) => {
           const nuevaLista = new Lista(l.titulo);
           nuevaLista.id = l.id;

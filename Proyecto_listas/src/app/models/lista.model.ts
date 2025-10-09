@@ -14,6 +14,6 @@ this.titulo = titulo;
 this.creadaEn = new Date();
 this.completada = false;
 this.item = [];
-this.id = new Date().getTime();
+this.id = new Date().getTime();   //id unico basado en la fecha de creación
  }
 }

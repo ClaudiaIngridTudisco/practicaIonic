@@ -12,7 +12,20 @@
 <!-- Componente donde se muestran las listas --> 
  
 <app-listas [tipo]="'por hacer'">  <!--Se le pasa el parámetro "tipo" con el valor "por hacer" para que el componente liste solo las listas que no están completadas.-->
-  
+  <!--<ion-list>
+<ion-item-sliding *ngFor="let listaItem of listaService.listas">
+  <ion-item>
+<ion-label>{{ listaItem.titulo }}
+</ion-label> 
+<ion-item-options side="start">
+<ion-item-option color="warning" (click)="unread()">Editar</ion-item-option>
+</ion-item-options>
+<ion-item-options side="end">
+<ion-item-option color="danger" (click)="unread()">Eliminar</ion-item-option>
+</ion-item-options>
+</ion-item>
+</ion-item-sliding>
+</ion-list>-->
 </app-listas>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="AgregarLista()">
