@@ -16,64 +16,63 @@ import { FiltroListaModule } from '../../pipes/filtro-lista-module';
 })
 
 export class ListasComponent implements OnInit {
-  @Input() tipo:string = '';       //para pasar el parámetro del tab en el cual esté posicionado el usuario
+  @Input() tipo: string = '';       //para pasar el parámetro del tab en el cual esté posicionado el usuario
 
-  
+
   constructor(
-    public listaService: ListaService
-    , private roter: Router
+    public listaService: ListaService,
+    private router: Router
   ) { }
 
   listaSeleccionada(listaItem: Lista) {
-    
-   const URL = '/agregar/' + listaItem.id 
-   this.roter.navigateByUrl(URL);
+    const URL = '/agregar/' + listaItem.id
+    this.router.navigateByUrl(URL);
   }
 
 
-async EditarLista(lista: Lista) { 
-let alerta = await this.listaService.alertController.create({ 
-header: "Editar lista", 
-inputs: [ 
-{ 
-type: "text", 
-name: "titulo", 
-placeholder: "Ingresar nuevo nombre de la lista", 
-value: lista.titulo 
-} 
-], 
-buttons: [ 
-{ 
-text: "Cancelar", 
-role: "cancel" 
-}, 
-{ 
-text: "Editar", 
-handler: (data:any)=> { 
-let esValido: boolean = this.listaService.validarInput(data); 
-if (esValido){ 
-lista.titulo = data.titulo, 
-this.listaService.editarLista(lista); 
-this.listaService.presentToast('Lista editada correctamente!'); 
-} 
-} 
-} 
-] 
-}) 
-await alerta.present(); 
-}
+  async EditarLista(lista: Lista) {
+    let alerta = await this.listaService.alertController.create({
+      header: "Editar lista",
+      inputs: [
+        {
+          type: "text",
+          name: "titulo",
+          placeholder: "Ingresar nuevo nombre de la lista",
+          value: lista.titulo
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel"
+        },
+        {
+          text: "Editar",
+          handler: (data: any) => {
+            let esValido: boolean = this.listaService.validarInput(data);
+            if (esValido) {
+              lista.titulo = data.titulo,
+                this.listaService.editarLista(lista);
+              this.listaService.presentToast('Lista editada correctamente!');
+            }
+          }
+        }
+      ]
+    })
+    await alerta.present();
+  }
 
 
-editarLista(listaItem: Lista) {
-this.EditarLista(listaItem);
-}
+  editarLista(listaItem: Lista) {
+    this.EditarLista(listaItem);
+  }
 
 
-eliminarLista(listaItem: Lista) {
-this.listaService.eliminarLista(listaItem);
-console.log("Eliminar lista:", listaItem);
-}
+  eliminarLista(listaItem: Lista) {
+    this.listaService.eliminarLista(listaItem);
+    console.log("Eliminar lista:", listaItem);
+  }
 
 
- ngOnInit() {}
+  ngOnInit() { }
 }

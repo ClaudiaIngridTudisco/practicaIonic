@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'agregar/:idlista',    //Esto nos permitirá acceder al detalle de la lista que el usuario ingrese, para identificarla se le enviará el id de la misma.
+    path: 'agregar/:idlista',    
     loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
   }
 ];

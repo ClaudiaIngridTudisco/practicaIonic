@@ -22,14 +22,6 @@ export class ListaService {
 
    crearLista(nombreLista:string){
     let ObjetoLista = new Lista (nombreLista);
-    /*let ObjetoLista = { 
-    id: 0,
-    titulo: nombreLista,
-    creadaEn: new Date(),
-    terminadaEn: null,
-    completada: false,
-    item: [] //Para guardar la lista de actividades
-      };*/
 
     this.listas.push(ObjetoLista);//Ingresamos en el array de listas el objeto con los datos creados
     this.guardarStorage();
@@ -44,8 +36,8 @@ export class ListaService {
     localStorage.setItem('listas', stringListas); //Se debe ingresar dos parámetros, el primero un nombre y el segundo el contenido
     }
 
-    obtenerLista(idLista: string | number) {
-    const id = Number(idLista); //Parseamos el dato a Number, por si viene de tipo string, de esta manera siempre trabajaremos con un Number
+    obtenerLista(idlista: string | number) {
+    const id = Number(idlista); //Parseamos el dato a Number, por si viene de tipo string, de esta manera siempre trabajaremos con un Number
     let lista = this.listas.find((itemLista)=> itemLista.id == id);
     return lista;
     }
@@ -53,17 +45,7 @@ export class ListaService {
     //Función para evitar que se borren los datos cargados en el LocalStorage
 
     cargarStorage() {
-      /*cargarStorage() {
-      const listaStorage = localStorage.getItem('listas'); //Se debe ingresar el parámetro con el nombre del objeto que queremos recuperar
-    if(listaStorage === null) {
-    return this.listas = []; //Si el Storage está vacío devolvemos el objeto listas vacío también
-      }
-    else
-    {
-    let objLista = JSON.parse(listaStorage); //Convierte el texto plano a objeto para poder ingresarlo
-    return this.listas = objLista;
-    }
-    }*/
+ 
       const listaStorage = localStorage.getItem('listas');
       if (listaStorage === null) {
         return this.listas = [];

@@ -23,11 +23,11 @@ export class AgregarPage implements OnInit {
     private router: ActivatedRoute,
     public listaService: ListaService
   ) { 
-    let idLista = this.router.snapshot.paramMap.get('idLista');
+  let idlista = this.router.snapshot.paramMap.get('idlista');
     this.lista = new Lista('');
     this.nombreItem = '';
-    if(idLista) {
-    let ObjetoLista = this.listaService.obtenerLista(idLista);
+    if(idlista) {
+    let ObjetoLista = this.listaService.obtenerLista(idlista);
     if(ObjetoLista){
     this.lista = ObjetoLista;
     }
@@ -37,8 +37,9 @@ export class AgregarPage implements OnInit {
   ngOnInit() {
   }
   agregar() {
+    console.log("AGREGAR");
     if(this.nombreItem.length === 0) { return }   //Si el nombre del item está vacío no hacemos nada
-    const actividad = new Actividad(this.nombreItem);
+    const actividad = new Actividad(this.nombreItem);  //Creamos una nueva actividad con el nombre del item
     this.lista.item.push(actividad);  //Ingresamos el nuevo item al array de items de la lista actual
     this.listaService.guardarStorage(); 
     this.nombreItem = '';
